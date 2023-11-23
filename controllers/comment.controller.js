@@ -22,7 +22,7 @@ exports.listComment = async (req,res,next) => {
         dieu_kien_loc = { comic: req.query.comic}
     }
     // Luu y truyen dung tham so, neu truyen sai thi mongoose tu tao ra collection theo tham so
-    const data = await Comment.find(dieu_kien_loc).populate('user','fullName').populate('comic','name')
+    const data = await Comment.find(dieu_kien_loc).populate('user','fullName image').populate('comic','name')
     res.status(200).json({
         data: data
     });

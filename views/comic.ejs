@@ -389,6 +389,20 @@
             color: gray;
             float: right;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
 
 
         
@@ -476,40 +490,59 @@
     </div>
     <div class="col-md-8" style="height: 600px;">
         <h5 style="margin-top: 10px;margin-bottom: 10px">Danh sách truyện tranh</h5>
-        <div class="ListBook" >
-            <% const user = dataUser %>
-            <% const likeComic = dataLikeComic %>
-            <% const authorData = dataAuthor %>
-            <% const commentData = dataComment %>
-
+        
+        <% const user = dataUser %>
+        <% const likeComic = dataLikeComic %>
+        <% const authorData = dataAuthor %>
+        <% const commentData = dataComment %>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Cover Image</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>PublicationYear</th>
+                <th>Description</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% var stt = 1%>
             <% dataComic.forEach((comic) => { %>
-                <div class="itemBook">
-                    <img class="imgBook" src="<%= comic.coverImage %>" alt="<%= comic.name %>">
-                    <br>
-                    <% if (comic.name.length > 20) { %>
-                        <em class="itemTextName"><%= comic.name.slice(0, 20) + '...' %></em>
-                    <% } else { %>
-                        <em class="itemTextName"><%= comic.name %></em>
-                    <% } %>
-                    <br>
-                    <em class="itemTextName">Năm xuất bản: <%= comic.publicationYear %></em>
-                    <br>
-                    <% // Tìm bookCategory tương ứng với ID
+                <tr style="border-bottom: 1px solid #ccc;">
+                    <td><%= stt %></td>
+                    <td>
+                        <img style="width: 50px;height: 80px;" src="<%= comic.coverImage %>">
+                    </td>
+                    <td>
+                        <%= comic.name %>
+                    </td>
+                    <td>
+                        <% // Tìm bookCategory tương ứng với ID
                         const author = dataAuthor.find(author => author._id.equals(comic.author));
                     if (author) { %>
-                        <em class="itemText">TG: <%= author.fullName %></em>
+                        TG: <%= author.fullName %>
                     <% } %>
-                    <button id="btn-details" style="margin-left: 5px; margin-top: 5px; width: 95%;" class="btn btn-warning" type="button" onclick="openAlertDialog(
-                        <%= JSON.stringify(comic)%>,
-                        <%= JSON.stringify(authorData)%>,
-                        <%= JSON.stringify(user)%>,
-                        <%= JSON.stringify(likeComic)%>,
-                        <%= JSON.stringify(commentData)%>,
-                        
-                        )">Details</button>
-                </div>
-                    <% }) %>
-            </div>
+                    </td>
+                    <td><%= comic.publicationYear %></td>
+                    <td> <%= comic.description %></td>
+                    <td>
+                        <button id="btn-details" style="margin-left: 5px; margin-top: 5px; width: 95%;" class="btn btn-warning" type="button" onclick="openAlertDialog(
+                            <%= JSON.stringify(comic)%>,
+                            <%= JSON.stringify(authorData)%>,
+                            <%= JSON.stringify(user)%>,
+                            <%= JSON.stringify(likeComic)%>,
+                            <%= JSON.stringify(commentData)%>,
+                            
+                            )">Details</button>
+                    </td>
+                    
+                </tr>
+                <% stt++ %>
+            <% }) %>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

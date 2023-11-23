@@ -50,6 +50,20 @@
             background-color: orangered;
             color: white;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
         
     </style>
 </head>
@@ -87,19 +101,45 @@
 <div class="row">
     <div class="col-md-12" style="height: 600px;">
         <h5 style="margin-top: 10px;margin-bottom: 10px">Danh sách người dùng</h5>
-        <div class="ListMember" >
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Image</th>
+                <th>FullName</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>PhoneNumber</th>
+                <th>Address</th>
+                <th>Action</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <% var stt = 1%>
             <% dataUser.forEach((user) => { %>
-            <div class="itemMember">
-                <img class="imgMember" src="<%= user.image %>">
-                <em class="itemTextFullName">TV: <%= user.fullName %></em>
-                <br>
-                <em class="itemText">SĐT: <%= user.phoneNumber %></em>
-                <br>
-                <em class="itemText">Địa chỉ: <%= user.address %></em>
-                <button id="buttonDel" type="button" class="btn btn-warning" onclick="confirmDelete(<%= JSON.stringify(user)%>)">Delete</button>
-            </div>
+                <tr style="border-bottom: 1px solid #ccc;">
+                    <td><%= stt %></td>
+                    <td>
+                        <img style="width: 30px;height: 30px;" src="<%= user.image %>">
+                    </td>
+                    <td>
+                        <%= user.fullName %>
+                    </td>
+                    <td>
+                        <%= user.username %>
+                    </td>
+                    <td><%= user.email %></td>
+                    <td> <%= user.phoneNumber %></td>
+                    <td> <%= user.address %></td>
+                    <td>
+                        <button id="buttonDel" type="button" class="btn btn-warning" onclick="confirmDelete(<%= JSON.stringify(user)%>)">Delete</button>
+                    </td>
+                </tr>
+                <% stt++ %>
             <% }) %>
-        </div>
+            </tbody>
+        </table>
     </div>
 </div>
 

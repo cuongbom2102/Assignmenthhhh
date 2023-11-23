@@ -194,6 +194,20 @@
         .button:hover{
             background-color: orangered;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
 
         
     </style>
@@ -262,18 +276,49 @@
     </div>
     <div class="col-md-8" style="height: 600px;">
         <h5>Danh sách tác giả</h5>
-        <div class="ListAuthor" >
+    
+
+
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Image</th>
+                <th>FullName</th>
+                <th>Nationality</th>
+                <th>Birthday</th>
+                <th>Biography</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% var stt = 1%>
             <% dataAuthor.forEach((author) => { %>
-            <div class="itemAuthor">
-                <img class="imgAuthor" src="<%= author.image %>">
-                <em class="itemTextFullName"><%= author.fullName %></em>
-                <br>
-                <em class="itemText">Quốc tịch: <%= author.nationality %></em>
-                    <button style="margin-left: 5px; margin-top: 5px; width: 95%" type="button" class="btn btn-warning" type="button" class="btn btn-warning" onclick="openAlertDialog(
-                        <%= JSON.stringify(author)%>)">Details</button>
-            </div>
-                <% }) %>
-        </div>
+                <tr style="border-bottom: 1px solid #ccc;">
+                    <td><%= stt %></td>
+                    <td>
+                        <img style="width: 30px;height: 30px;" src="<%= author.image %>">
+                    </td>
+                    <td>
+                        <%= author.fullName %>
+                    </td>
+                    <td>
+                        <%= author.nationality %>
+                    </td>
+                    <td><%= author.birthday %></td>
+                    <td> <%= author.biography %></td>
+                    <td>
+                        <button id="buttonDel" type="button" class="btn btn-warning" onclick="confirmDelete(<%= JSON.stringify(author)%>)">Delete</button>
+                    </td>
+                    <td>
+                        <button id="buttonDel" type="button" class="btn btn-warning" onclick="loadItemData(<%= JSON.stringify(author)%>)">Update</button>
+                    </td>
+                </tr>
+                <% stt++ %>
+            <% }) %>
+            </tbody>
+        </table>
 
     </div>
 </div>
@@ -436,10 +481,10 @@
         document.body.appendChild(alertDialog);
     }
 
-    function confirmDelete(_id) {
+    function confirmDelete(author) {
         var result = confirm("Bạn có chắc muốn xóa thành viên này không?");
         if (result) {
-            window.location.href = "author/deleteAuthor/?_id=" + _id;
+            window.location.href = "author/deleteAuthor/?_id=" + author._id;
         }
     }
 

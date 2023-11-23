@@ -20,8 +20,12 @@ var commentCtrl = require("../controllers/comment.controller");
 // Comic
 router.get("/list", comicCtrl.listComic);
 router.post("/add-comic", comicCtrl.addComic);
+router.post("/add-comic-in-app", comicCtrl.addComicInApp);
 router.post("/update-comic", comicCtrl.updateComic);
+router.post("/update-comic-in-app", comicCtrl.updateComicInApp);
 router.get("/delete-comic", comicCtrl.deleteComic);
+router.delete("/delete-comic-in-app/:_id", comicCtrl.deleteComicInApp);
+
 
 // Like Comic
 router.get("/list-likeComic", likeComicCtrl.listLikeComic);

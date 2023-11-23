@@ -9,7 +9,6 @@ router.get('/list', userCtrl.listUser);
 router.post('/addUser', userCtrl.addUser);
 router.post('/updateUser', userCtrl.updateUser);
 router.delete('/deleteUser/:_id', userCtrl.deleteUser);
-
 router.get('/deleteUserOnWeb', userCtrl.deleteUserOnWeb);
 
 /* GET home page. */
