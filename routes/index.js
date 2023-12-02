@@ -17,7 +17,8 @@ router.get('/',async function(req, res, next) {
 
 
   if(admin){
-    console.log(admin)
+    
+    //console.log(admin)
     res.render('index', {
       dataAuthor:dataAuthor,
       dataComic:dataComic,
@@ -38,5 +39,12 @@ router.get('/logout', function(req, res, next) {
     res.redirect('/'); // Chuyển hướng về trang đăng nhập sau khi đăng xuất
   });
 });
+
+// router.get('/notify', (req,res, next)=>{
+//   sock.io.emit("new msg", "Noi dung thong bao");
+//   res.end();
+//   res.redirect('/'); 
+//   })
+
 
 module.exports = router;

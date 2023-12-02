@@ -2,6 +2,8 @@ const User = require('../models/user.model');
 const Comment = require('../models/comment.model');
 const LikeComic = require('../models/likeComic.model');
 const multer = require ('multer')
+var sock = require('../socket_server');
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './uploads'); // Duong dan luu tru file
@@ -43,6 +45,7 @@ exports.addUser = async (req,res,next) => {
                 image: image // Lưu đường dẫn tạm thời của tệp tin đã tải lên
             });
             res.status(201).json({ message: 'Thêm người dùng thành công', newItem: newUser });
+        
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Lỗi server' });

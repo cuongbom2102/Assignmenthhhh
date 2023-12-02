@@ -52,7 +52,8 @@ router.get("/", async function (req, res, next) {
 
 
   if (admin) {
-    console.log(admin);
+    
+    //console.log(admin);
     res.render("comic", {
       dataAuthor:dataAuthor,
       dataComic:dataComic,

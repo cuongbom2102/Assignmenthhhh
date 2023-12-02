@@ -1,6 +1,8 @@
 const Comic = require('../models/comic.model');
 const multer = require ('multer')
 const Comment = require('../models/comment.model');
+var sock = require('../socket_server');
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './uploads'); // Duong dan luu tru file
@@ -57,7 +59,7 @@ exports.addComic = async (req, res, next) => {
             coverImage: coverImage,
             contentImage: contentImages // Thêm mảng đường dẫn ảnh nội dung
         });
-
+        sock.io.emit("new msg", "Có sách được thêm mới!");
         res.redirect('/comic');
     });
 }
